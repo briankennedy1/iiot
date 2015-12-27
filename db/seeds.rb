@@ -11,9 +11,20 @@ headers = { 'content-type' => 'application/json',
             'trakt-api-key' => ENV['TRAKT_API_KEY']
           }
 
-response = HTTParty.get('https://api-v2launch.trakt.tv/calendars/all/shows/2015-12-27/1', headers: headers)
+today = DateTime.now.strftime('%F')
 
-response.parsed_response.each do |ep|
+response = HTTParty.get("https://api-v2launch.trakt.tv/calendars/all/shows/#{today}/30", headers: headers)
+
+episode_response = response.parsed_response
+
+pbar = ProgressBar.create(
+  starting_at: 0,
+  total: episode_response.length,
+  format: "%a %e %P% Processed: %c from %C"
+)
+
+
+episode_response.each do |ep|
   # Check if the SHOW exists
   current_show = Show.where(
     trakt_id: ep['show']['ids']['trakt']
@@ -52,4 +63,5 @@ response.parsed_response.each do |ep|
     tvdb_id: ep['episode']['ids']['tvdb']
   ) unless ep_title == bad_title
   current_ep.save
+  pbar.increment
 end
