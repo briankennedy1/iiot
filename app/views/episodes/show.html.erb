@@ -1,22 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<h3>
-  <%= @episode.show.title %>
-</h3>
+<h4 class="text-muted"><%= @episode.show.title %></4>
 <h1>
   <%= @episode.title %>
 </h1>
 
-
-<p>
-  <strong>Number:</strong>
-  <%= @episode.number %>
+<p class="lead">
+  Season <%= @episode.season %>, Episode <%= @episode.number %>
 </p>
-
-<p>
-  <strong>Season:</strong>
-  <%= @episode.season %>
-</p>
+<h3></h3>
+<div class="jumbotron">
+  <h1 class=""><%= @episode.air_date.strftime("%A, %B %d, %Y") %></h1>
+</div>
 
 <%= link_to 'Edit', edit_episode_path(@episode) %> |
 <%= link_to 'Back', show_path(@episode.show) %>
