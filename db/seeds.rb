@@ -23,7 +23,6 @@ pbar = ProgressBar.create(
   format: "%a %e %P% Processed: %c from %C"
 )
 
-
 episode_response.each do |ep|
   # Check if the SHOW exists
   current_show = Show.where(
@@ -39,17 +38,12 @@ episode_response.each do |ep|
     tmdb_id: ep['show']['ids']['tmdb'],
     tvrage_id: ep['show']['ids']['tvrage']
   )
-  current_show.save
 
   current_ep = Episode.where(
     tvdb_id: ep['episode']['ids']['tvdb']
   ).first_or_initialize
 
   ep_title = ep['episode']['title']
-  bad_title = ep_title.nil? ||
-              ep_title == '' ||
-              ep_title == 'TBD' ||
-              ep_title == 'TBA'
 
   current_ep.update(
     title: ep_title,
@@ -61,7 +55,9 @@ episode_response.each do |ep|
     imdb_id: ep['episode']['ids']['imdb'],
     tmdb_id: ep['episode']['ids']['tmdb'],
     tvdb_id: ep['episode']['ids']['tvdb']
-  ) unless ep_title == bad_title
-  current_ep.save
+  ) unless ep_title.nil? ||
+           ep_title == '' ||
+           ep_title == 'TBD' ||
+           ep_title == 'TBA'
   pbar.increment
 end
