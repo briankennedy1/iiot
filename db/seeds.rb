@@ -29,12 +29,27 @@ response.parsed_response.each do |ep|
     tvrage_id: ep['show']['ids']['tvrage']
   )
   current_show.save
-  # Check if episode exists
-    # if so, update with latest info
-    # not create it with details
 
-  # ep_title = ep['episode']['title']
-  # show_title = ep['show']['title']
-  # options = ep_title.nil? || ep_title == '' || ep_title == 'TBD' || ep_title == 'TBA'
-  # ap "#{show_title}: #{ep_title}" unless options
+  current_ep = Episode.where(
+    trakt_id: ep['episode']['ids']['trakt']
+  ).first_or_initialize
+
+  ep_title = ep['episode']['title']
+  bad_title = ep_title.nil? ||
+              ep_title == '' ||
+              ep_title == 'TBD' ||
+              ep_title == 'TBA'
+
+  current_ep.update(
+    title: ep_title,
+    show_id: current_show.id,
+    air_date: ep['first_aired'],
+    number: ep['episode']['number'],
+    season: ep['episode']['season'],
+    trakt_id: ep['show']['ids']['trakt'],
+    imdb_id: ep['show']['ids']['imdb'],
+    tmdb_id: ep['show']['ids']['tmdb'],
+    tvrage_id: ep['show']['ids']['tvrage']
+  ) unless ep_title == bad_title
+  current_ep.save
 end
