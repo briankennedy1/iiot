@@ -31,7 +31,7 @@ response.parsed_response.each do |ep|
   current_show.save
 
   current_ep = Episode.where(
-    trakt_id: ep['episode']['ids']['trakt']
+    tvdb_id: ep['episode']['ids']['tvdb']
   ).first_or_initialize
 
   ep_title = ep['episode']['title']
@@ -43,13 +43,13 @@ response.parsed_response.each do |ep|
   current_ep.update(
     title: ep_title,
     show_id: current_show.id,
-    air_date: ep['first_aired'],
+    air_date: DateTime.parse(ep['first_aired']),
     number: ep['episode']['number'],
     season: ep['episode']['season'],
-    trakt_id: ep['show']['ids']['trakt'],
-    imdb_id: ep['show']['ids']['imdb'],
-    tmdb_id: ep['show']['ids']['tmdb'],
-    tvrage_id: ep['show']['ids']['tvrage']
+    trakt_id: ep['episode']['ids']['trakt'],
+    imdb_id: ep['episode']['ids']['imdb'],
+    tmdb_id: ep['episode']['ids']['tmdb'],
+    tvdb_id: ep['episode']['ids']['tvdb']
   ) unless ep_title == bad_title
   current_ep.save
 end
