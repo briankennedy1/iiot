@@ -1,14 +1,16 @@
+<% content_for(:title, "Is '#{@episode.title}' of #{@episode.show.title} on tonight?".html_safe)%>
+
 <p id="notice"><%= notice %></p>
 
-<h4 class="text-muted"><%= @episode.show.title %></4>
+
 <h1>
-  <%= @episode.title %>
+  <small class="text-muted">Is </small> "<%= @episode.title %>" <small class="text-muted">from</small> <%= @episode.show.title %> <small class="text-muted">on tonight?</small>
 </h1>
 
 <p class="lead">
   Season <%= @episode.season %>, Episode <%= @episode.number %>
 </p>
-<h3></h3>
+
 <div class="jumbotron">
   <h1 class=""><%= @episode.air_date.strftime("%A, %B %d, %Y") %></h1>
 </div>
