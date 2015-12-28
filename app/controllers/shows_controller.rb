@@ -9,7 +9,7 @@ class ShowsController < ApplicationController
   end
 
   def tonight
-    @episodes = Episode.where(air_date: Date.today).order(:title)
+    @episodes = Episode.includes(:show).where(air_date: Date.today).order('shows.title ASC')
   end
 
   # GET /shows/1

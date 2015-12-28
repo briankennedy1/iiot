@@ -1,10 +1,12 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# To Do
+# To Do
+# To Do
+
+# Destroy all episodes in the past
+
+# To Do
+# To Do
+# To Do
 
 headers = { 'content-type' => 'application/json',
             'trakt-api-version' => '2',

@@ -15,5 +15,11 @@
   <h1 class=""><%= @episode.air_date.strftime("%A, %B %d, %Y") %></h1>
 </div>
 
+<p>
+  More info:
+  <% if @episode.tvdb_id %>
+    <a href="https://trakt.tv/search/tvdb?utf8=%E2%9C%93&query=<%= @episode.tvdb_id %>">Trakt</a>
+  <% end %>
+</p>
 
 <%= link_to 'Back', show_path(@episode.show) %>
