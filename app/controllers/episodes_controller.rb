@@ -5,7 +5,8 @@ class EpisodesController < ApplicationController
   # GET /episodes
   # GET /episodes.json
   def index
-    @episodes = Episode.all.order('title')
+    # @episodes = Episode.all.order('title')
+    redirect_to "/shows/#{params['show_id']}"
   end
 
   # GET /episodes/1
@@ -74,7 +75,7 @@ class EpisodesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_episode
-    @episode = Episode.find(params[:id])
+    @episode = Episode.friendly.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

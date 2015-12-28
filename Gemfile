@@ -28,6 +28,7 @@ gem 'httparty'
 gem 'awesome_print'
 gem 'ruby-progressbar'
 gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'friendly_id', '~> 5.1.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

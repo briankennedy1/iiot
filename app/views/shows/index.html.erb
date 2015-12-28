@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Shows that might be on tonight</h1>
-
+<p class="lead">
+  Every show in the database.
+</p>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -13,15 +15,8 @@
   <tbody>
     <% @shows.each do |show| %>
       <tr>
-        <td><%= show.title %></td>
-        <td><%= link_to 'Show', show %></td>
-        <td><%= link_to 'Edit', edit_show_path(show) %></td>
-        <td><%= link_to 'Destroy', show, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to show.title, show %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Show', new_show_path %>

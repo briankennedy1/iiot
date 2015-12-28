@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :episodes
-  resources :shows
+  resources :shows do
+    resources :episodes
+  end
   root 'shows#tonight'
+  # get '/shows/:id/episodes' => 'show#index'
+  get '/shows/:id/episodes', to: redirect('/shows/%{id}')
+  get '/stories/:name', to: redirect('/articles/%{name}')
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

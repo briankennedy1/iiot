@@ -16,12 +16,8 @@
     <% @episodes.each do |episode| %>
       <tr>
         <td><%= link_to episode.show.title, episode.show %></td>
-        <td>"<%= link_to episode.title, episode %>" <small>Season <%= episode.season %> Episode <%= episode.number %></small></td>
+        <td>"<%= link_to episode.title, show_episode_path(episode.show, episode) %>" <small>Season <%= episode.season %> Episode <%= episode.number %></small></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Show', new_show_path %>

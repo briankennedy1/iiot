@@ -18,7 +18,7 @@
   <tbody>
     <% @show.episodes.each do |episode| %>
       <tr>
-        <td>"<%= link_to episode.title, episode %>"</td>
+        <td>"<%= link_to episode.title, show_episode_path(episode.show, episode) %>"</td>
         <td><%= episode.air_date.strftime("%A, %B %d, %Y") %></td>
         <td><%= episode.season %></td>
         <td><%= episode.number %></td>
