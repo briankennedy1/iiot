@@ -1,5 +1,6 @@
 class EpisodesController < ApplicationController
   before_action :set_episode, only: [:show, :edit, :update, :destroy]
+  before_action :admin?, only: [:create, :edit, :update, :destroy]
 
   # GET /episodes
   # GET /episodes.json
@@ -62,13 +63,22 @@ class EpisodesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_episode
-      @episode = Episode.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def episode_params
-      params.require(:episode).permit(:title, :number, :season)
+  def admin?
+    if 1 + 1 == 3
+      # user is logged in
+    else
+      redirect_to '/'
     end
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_episode
+    @episode = Episode.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def episode_params
+    params.require(:episode).permit(:title, :number, :season)
+  end
 end

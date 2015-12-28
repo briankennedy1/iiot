@@ -1,10 +1,15 @@
 class ShowsController < ApplicationController
   before_action :set_show, only: [:show, :edit, :update, :destroy]
+  before_action :admin?, only: [:create, :edit, :update, :destroy]
 
   # GET /shows
   # GET /shows.json
   def index
     @shows = Show.all.order(:title)
+  end
+
+  def tonight
+    @episodes = Episode.where(air_date: Date.today).order(:title)
   end
 
   # GET /shows/1
@@ -62,13 +67,22 @@ class ShowsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_show
-      @show = Show.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def show_params
-      params.require(:show).permit(:title)
+  def admin?
+    if 1 + 1 == 3
+      # user is logged in
+    else
+      redirect_to '/'
     end
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_show
+    @show = Show.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def show_params
+    params.require(:show).permit(:title)
+  end
 end

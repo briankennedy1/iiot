@@ -48,7 +48,7 @@ episode_response.each do |ep|
   current_ep.update(
     title: ep_title,
     show_id: current_show.id,
-    air_date: DateTime.parse(ep['first_aired']),
+    air_date: Date.parse(ep['first_aired']),
     number: ep['episode']['number'],
     season: ep['episode']['season'],
     trakt_id: ep['episode']['ids']['trakt'],
