@@ -34,7 +34,6 @@ episode_response.each do |ep|
   current_show.update(
     title: ep['show']['title'],
     debut_year: ep['show']['year'],
-    slug: ep['show']['ids']['slug'],
     trakt_id: ep['show']['ids']['trakt'],
     imdb_id: ep['show']['ids']['imdb'],
     tmdb_id: ep['show']['ids']['tmdb'],
