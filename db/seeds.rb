@@ -1,13 +1,3 @@
-# To Do
-# To Do
-# To Do
-
-# Destroy all episodes in the past
-
-# To Do
-# To Do
-# To Do
-
 headers = { 'content-type' => 'application/json',
             'trakt-api-version' => '2',
             'trakt-api-key' => ENV['TRAKT_API_KEY']
@@ -62,3 +52,5 @@ episode_response.each do |ep|
            ep_title == 'TBA'
   pbar.increment
 end
+
+Episode.where(air_date: 100.years.ago...Date.yesterday).destroy_all
