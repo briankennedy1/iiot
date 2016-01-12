@@ -2,13 +2,13 @@
 
 <p id="notice"><%= notice %></p>
 
-<div class="" style="text-align:center">
+<div class="centered">
   <h1>
     <small class="text-muted">Is </small> "<%= @episode.title %>" <small class="text-muted">from</small> <%= link_to @episode.show.title, show_path(@episode.show) %><small class="text-muted"> on tonight?</small>
   <% if @episode.air_date == Date.today %>
-    <span style="color: green">YES</span>
+    <span class="green">YES</span>
   <% else %>
-    <span style="color: red">NO</span>
+    <span class="red">NO</span>
   <% end %>
   </h1>
   <p class="lead">
@@ -21,6 +21,8 @@
     <a href="https://trakt.tv/search/tvdb?utf8=%E2%9C%93&query=<%= @episode.tvdb_id %>" target="_blank">Trakt</a>
   <% end %>
   </p>
+  <div class="margin-top-25">
+    <%= link_to @episode.show.title, show_path(@episode.show), { :class=>"btn btn-primary btn-sm" } %>
+    <a href="/" class="btn btn-primary btn-sm" role="button">Shows On Tonight</a>
+  </div>
 </div>
-
-<%= link_to 'Back', show_path(@episode.show) %>

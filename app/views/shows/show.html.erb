@@ -3,30 +3,52 @@
 <p id="notice"><%= notice %></p>
 
 <h1>
-  <small class="text-muted">Is</small> <%= @show.title %> <small class="text-muted">on tonight?</small>
-</h1>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Season</th>
-      <th>Episode</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @show.episodes.each do |episode| %>
-      <tr>
-        <td>"<%= link_to episode.title, show_episode_path(episode.show, episode) %>"</td>
-        <td><%= episode.air_date.strftime("%A, %B %d, %Y") %></td>
-        <td><%= episode.season %></td>
-        <td><%= episode.number %></td>
-      </tr>
+<small class="text-muted">Is</small> <%= @show.title %> <small class="text-muted">on tonight?</small>
+  <% if @show.episodes.empty? %>
+    <span style='color:red'>NO</span>
+  <% else %>
+    <% if @show.episodes.where(air_date: Date.today).empty? %>
+      <span style='color:red'>NO</span>
+    <% else %>
+      <span style='color:green'>YES</span>
     <% end %>
-  </tbody>
-</table>
+  <% end %>
+</h1>
+
+<% if @show.episodes.empty? %>
+<div class="margin-top-25">
+  <h4>No episodes in the next 30 days.</h4>
+</div>
+<% else %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Season</th>
+        <th>Episode</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @show.episodes.each do |episode| %>
+        <% if episode.air_date == Date.today %>
+          <tr class="table-success">
+        <% else %>
+          <tr class="">
+        <% end %>
+          <td>"<%= link_to episode.title, show_episode_path(episode.show, episode) %>"</td>
+          <td><%= episode.air_date.strftime("%A, %B %d, %Y") %></td>
+          <td><%= episode.season %></td>
+          <td><%= episode.number %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 
 
-<%= link_to 'Back', '/' %>
+<div class="margin-top-25 centered">
+  <a href="/" class="btn btn-primary btn-sm" role="button">Shows On Tonight</a>
+</div>
