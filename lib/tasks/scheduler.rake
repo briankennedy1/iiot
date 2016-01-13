@@ -57,5 +57,8 @@ task :update_episodes => :environment do
 end
 
 task :delete_old_episodes => :environment do
-  Episode.where(air_date: 100.years.ago...Date.yesterday).destroy_all
+  episodes = Episode.where(air_date: 100.years.ago...Date.yesterday)
+  put "#{episodes.count} episodes to be deleted"
+  episodes.destroy_all
+  put "#{episodes.count} remain"
 end
