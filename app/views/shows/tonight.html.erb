@@ -2,8 +2,7 @@
 
 <p id="notice"><%= notice %></p>
 
-<h1 class="centered">Shows on tonight</h1>
-<h2 class="centered"><small>Current time: <%= Time.now.strftime("%l:%M %p %A, %B %d, %Y") %></small></h2>
+<h1 class="centered">Shows on tonight <small><%= Time.now.strftime("%A, %B %d, %Y") %></small></h1>
 
 <table class="table table-hover">
   <thead>
