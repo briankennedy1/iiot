@@ -54,9 +54,7 @@ task :update_episodes => :environment do
              ep_title == 'TBA'
     pbar.increment
   end
-end
 
-task :delete_old_episodes => :environment do
   episodes = Episode.where(air_date: 100.years.ago...Date.yesterday)
   p "#{episodes.count} episodes to be deleted"
   episodes.destroy_all
