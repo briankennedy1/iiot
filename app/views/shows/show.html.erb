@@ -7,10 +7,10 @@
   <% if @episodes.empty? %>
     <span style='color:red'>NO</span>
   <% else %>
-    <% if @episodes.where(air_date: Date.today).empty? %>
-      <span style='color:red'>NO</span>
-    <% else %>
+    <% if @episodes.first.air_date.to_date == Date.current %>
       <span style='color:green'>YES</span>
+    <% else %>
+      <span style='color:red'>No</span>
     <% end %>
   <% end %>
 </h1>
