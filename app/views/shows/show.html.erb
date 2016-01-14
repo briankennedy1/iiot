@@ -4,10 +4,10 @@
 
 <h1>
 <small class="text-muted">Is</small> <%= @show.title %> <small class="text-muted">on tonight?</small>
-  <% if @show.episodes.empty? %>
+  <% if @episodes.empty? %>
     <span style='color:red'>NO</span>
   <% else %>
-    <% if @show.episodes.where(air_date: Date.today).empty? %>
+    <% if @episodes.where(air_date: Date.today).empty? %>
       <span style='color:red'>NO</span>
     <% else %>
       <span style='color:green'>YES</span>
@@ -15,7 +15,7 @@
   <% end %>
 </h1>
 
-<% if @show.episodes.empty? %>
+<% if @episodes.empty? %>
 <div class="margin-top-25">
   <h4>No episodes in the next 30 days.</h4>
 </div>
@@ -31,8 +31,8 @@
     </thead>
 
     <tbody>
-      <% @show.episodes.each do |episode| %>
-        <% if episode.air_date == Date.today %>
+      <% @episodes.each do |episode| %>
+        <% if episode.air_date.to_date == Date.current %>
           <tr class="table-success">
         <% else %>
           <tr class="">
@@ -46,8 +46,6 @@
     </tbody>
   </table>
 <% end %>
-
-
 
 <div class="margin-top-25 centered">
   <a href="/" class="btn btn-primary btn-sm" role="button">Shows On Tonight</a>

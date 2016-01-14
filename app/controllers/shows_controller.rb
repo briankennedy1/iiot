@@ -9,12 +9,13 @@ class ShowsController < ApplicationController
   end
 
   def tonight
-    @episodes = Episode.includes(:show).where(air_date: Date.today).order('shows.title ASC, number')
+    @episodes = Episode.includes(:show).where(air_date: Date.current).order('shows.title ASC, number')
   end
 
   # GET /shows/1
   # GET /shows/1.json
   def show
+    @episodes = @show.episodes.order(:number)
   end
 
   # GET /shows/new

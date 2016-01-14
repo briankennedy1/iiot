@@ -5,6 +5,7 @@
 <div class="centered">
   <h1>
     <small class="text-muted">Is </small> "<%= @episode.title %>" <small class="text-muted">from</small> <%= link_to @episode.show.title, show_path(@episode.show) %><small class="text-muted"> on tonight?</small>
+
   <% if @episode.air_date == Date.today %>
     <span class="green">YES</span>
   <% else %>
