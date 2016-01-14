@@ -53,7 +53,7 @@ episode_response.each do |ep|
   pbar.increment
 end
 
-episodes = Episode.where(air_date: 2.years.ago..Date.today)
+episodes = Episode.where(air_date: 2.years.ago..Date.current)
 p "#{episodes.count} episodes to be deleted"
 episodes.destroy_all
 p "#{episodes.count} remain"
