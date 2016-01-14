@@ -55,7 +55,7 @@ task :update_episodes => :environment do
     pbar.increment
   end
 
-  episodes = Episode.where(air_date: 2.years.ago..Date.current)
+  episodes = Episode.where(air_date: 2.years.ago...Date.today)
   p "#{episodes.count} episodes to be deleted"
   episodes.destroy_all
   p "#{episodes.count} remain"
